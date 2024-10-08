@@ -61,7 +61,7 @@ public class LexicalAnalyzer {
                 case "IDENTIFIER":
                     char nextChar = (index + 1 < content.length()) ? content.charAt(index + 1) : '\0';
                     if (!Character.isLetterOrDigit(nextChar) && nextChar != '_') {
-                        String identifier = buffer.toString().trim();
+                        String identifier = buffer.toString();
                         if (identifier.equals("int"))
                         {
                             tokens.add(Token.simple("int"));
@@ -85,7 +85,7 @@ public class LexicalAnalyzer {
                 case "NUMBER":
                     char nextNumberChar = (index + 1 < content.length()) ? content.charAt(index + 1) : '\0';
                     if (!Character.isDigit(nextNumberChar)) {
-                        tokens.add(Token.normal("IntConst", buffer.toString().trim()));
+                        tokens.add(Token.normal("IntConst", buffer.toString()));
                         dfa.reset();
                         buffer.setLength(0);
                     }
