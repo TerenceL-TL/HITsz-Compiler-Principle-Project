@@ -27,6 +27,8 @@ public class Main {
         lexer.loadFile(FilePathConfig.SRC_CODE_PATH);
         lexer.run();
         lexer.dumpTokens(FilePathConfig.TOKEN_PATH);
+        System.out.println("Lexical Analysis Done!");
+
         final var tokens = lexer.getTokens();
         symbolTable.dumpTable(FilePathConfig.OLD_SYMBOL_TABLE);
 

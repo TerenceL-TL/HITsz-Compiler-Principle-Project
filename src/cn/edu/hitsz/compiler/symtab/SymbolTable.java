@@ -5,6 +5,7 @@ import cn.edu.hitsz.compiler.utils.FileUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,6 +17,12 @@ import java.util.Map;
  */
 public class SymbolTable {
 
+    private final Map<String, SymbolTableEntry> symbolTable;
+
+    public SymbolTable() {
+        this.symbolTable = new HashMap<>();
+    }
+
     /**
      * 获取符号表中已有的条目
      *
@@ -24,7 +31,10 @@ public class SymbolTable {
      * @throws RuntimeException 该符号在表中不存在
      */
     public SymbolTableEntry get(String text) {
-        throw new NotImplementedException();
+        if (!symbolTable.containsKey(text)) {
+            throw new RuntimeException("Symbol '" + text + "' not found in the symbol table.");
+        }
+        return symbolTable.get(text);
     }
 
     /**
@@ -35,7 +45,12 @@ public class SymbolTable {
      * @throws RuntimeException 该符号已在表中存在
      */
     public SymbolTableEntry add(String text) {
-        throw new NotImplementedException();
+        if (symbolTable.containsKey(text)) {
+            throw new RuntimeException("Symbol '" + text + "' already exists in the symbol table.");
+        }
+        SymbolTableEntry newEntry = new SymbolTableEntry(text);
+        symbolTable.put(text, newEntry);
+        return newEntry;
     }
 
     /**
@@ -45,7 +60,7 @@ public class SymbolTable {
      * @return 该符号的条目是否位于符号表中
      */
     public boolean has(String text) {
-        throw new NotImplementedException();
+        return symbolTable.containsKey(text);
     }
 
     /**
@@ -54,7 +69,7 @@ public class SymbolTable {
      * @return 符号表的所有条目
      */
     private Map<String, SymbolTableEntry> getAllEntries() {
-        throw new NotImplementedException();
+        return symbolTable;
     }
 
     /**
