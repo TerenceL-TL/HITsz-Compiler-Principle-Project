@@ -62,13 +62,9 @@ public class LexicalAnalyzer {
                     char nextChar = (index + 1 < content.length()) ? content.charAt(index + 1) : '\0';
                     if (!Character.isLetterOrDigit(nextChar) && nextChar != '_') {
                         String identifier = buffer.toString();
-                        if (identifier.equals("int"))
+                        if (TokenKind.isAllowed(identifier))
                         {
-                            tokens.add(Token.simple("int"));
-                        }
-                        else if (identifier.equals("return"))
-                        {
-                            tokens.add(Token.simple("return"));
+                            tokens.add(Token.simple(identifier));
                         }
                         else {
                             if (!symbolTable.has(identifier))
